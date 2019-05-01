@@ -1,0 +1,7 @@
+FROM golang:1.12
+
+COPY build.sh .
+
+RUN chmod -R 777 build.sh
+
+CMD ./build.sh goplugin112

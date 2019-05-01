@@ -1,0 +1,7 @@
+FROM golang:1.12
+
+COPY run.sh .
+
+RUN chmod -R 777 run.sh
+
+CMD ./run.sh
