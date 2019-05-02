@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BUILDHOME=/usr/build/$1
+BUILDHOME=/usr/build/goplugin$1
 
 rm -rf $BUILDHOME
 mkdir $BUILDHOME

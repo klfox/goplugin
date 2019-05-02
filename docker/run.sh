@@ -1,13 +1,16 @@
 #!/bin/sh
 
-echo "Client: 1.11, Plugin 1.11"
-/usr/build/goplugin111/client -p /usr/build/goplugin111/plugin.so
+LOWERVERSION=$1
+UPPERVERSION=$2
 
-echo "Client: 1.12, Plugin 1.12"
-/usr/build/goplugin112/client -p /usr/build/goplugin112/plugin.so
+echo "Client: $LOWERVERSION, Plugin $LOWERVERSION"
+/usr/build/goplugin$LOWERVERSION/client -p /usr/build/goplugin$LOWERVERSION/plugin.so
 
-echo "Client: 1.11, Plugin 1.12"
-/usr/build/goplugin111/client -p /usr/build/goplugin112/plugin.so
+echo "Client: $UPPERVERSION, Plugin $UPPERVERSION"
+/usr/build/goplugin$UPPERVERSION/client -p /usr/build/goplugin$UPPERVERSION/plugin.so
 
-echo "Client: 1.12, Plugin 1.11"
-/usr/build/goplugin112/client -p /usr/build/goplugin111/plugin.so
+echo "Client: $LOWERVERSION, Plugin $UPPERVERSION"
+/usr/build/goplugin$LOWERVERSION/client -p /usr/build/goplugin$UPPERVERSION/plugin.so
+
+echo "Client: $UPPERVERSION, Plugin $LOWERVERSION"
+/usr/build/goplugin$UPPERVERSION/client -p /usr/build/goplugin$LOWERVERSION/plugin.so

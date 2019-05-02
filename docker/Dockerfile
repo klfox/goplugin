@@ -1,0 +1,11 @@
+ARG IMAGEVERSION=latest
+FROM golang:$IMAGEVERSION
+
+ARG GOVERSION
+ENV GOVERSION ${GOVERSION}
+
+COPY build.sh .
+
+RUN chmod -R 777 build.sh
+
+CMD ./build.sh $GOVERSION

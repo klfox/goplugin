@@ -1,15 +1,18 @@
 #!/bin/sh
 
+LOWERVERSION=$1
+UPPERVERSION=$2
+
 echo "Execute build of Docker images"
-docker build -f Dockerfile111 . -t goplugin111
-docker build -f Dockerfile112 . -t goplugin112
-docker build -f Dockerfile.run . -t gopluginrun
+docker build -f Dockerfile --build-arg IMAGEVERSION=$LOWERVERSION --build-arg GOVERSION=$LOWERVERSION . -t goplugin$LOWERVERSION
+docker build -f Dockerfile --build-arg IMAGEVERSION=$UPPERVERSION --build-arg GOVERSION=$UPPERVERSION . -t goplugin$UPPERVERSION
+docker build -f Dockerfile.run --build-arg LOWERVERSION=$LOWERVERSION --build-arg UPPERVERSION=$UPPERVERSION . -t gopluginrun
 
-echo "Execute Go 1.11 build"
-docker run --rm -v "$PWD"/build:/usr/build goplugin111
+echo "Execute Go $LOWERVERSION build"
+docker run --rm -v "$PWD"/build:/usr/build goplugin$LOWERVERSION
 
-echo "Execute Go 1.12 build"
-docker run --rm -v "$PWD"/build:/usr/build goplugin112
+echo "Execute Go $UPPERVERSION build"
+docker run --rm -v "$PWD"/build:/usr/build goplugin$UPPERVERSION
 
 echo "Run Go plugin cross-version test"
 docker run --rm -v "$PWD"/build:/usr/build gopluginrun
