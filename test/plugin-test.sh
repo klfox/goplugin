@@ -7,8 +7,8 @@ LOWERTAG=goplugin$LOWERVERSION
 UPPERTAG=goplugin$UPPERVERSION
 
 echo "Execute build of Docker images"
-docker build -f Dockerfile --build-arg IMAGEVERSION=$LOWERVERSION --build-arg GOVERSION=$LOWERVERSION . -t $LOWERTAG
-docker build -f Dockerfile --build-arg IMAGEVERSION=$UPPERVERSION --build-arg GOVERSION=$UPPERVERSION . -t $UPPERTAG
+docker build -f Dockerfile.build --build-arg IMAGEVERSION=$LOWERVERSION --build-arg GOVERSION=$LOWERVERSION . -t $LOWERTAG
+docker build -f Dockerfile.build --build-arg IMAGEVERSION=$UPPERVERSION --build-arg GOVERSION=$UPPERVERSION . -t $UPPERTAG
 docker build -f Dockerfile.run --build-arg LOWERVERSION=$LOWERVERSION --build-arg UPPERVERSION=$UPPERVERSION . -t gopluginrun
 
 echo "Execute Go $LOWERVERSION build"
